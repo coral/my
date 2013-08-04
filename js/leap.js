@@ -1,8 +1,6 @@
 var fingers = {};
 var wHeight = $(window).height();
 Leap.loop(function(frame) {
-	latestFrame = frame;
-	//document.getElementById('out').innerHTML = "<div>"+latestFrame.dump()+"</div>";
 
 	var fingerIds = {};
 
@@ -24,7 +22,7 @@ Leap.loop(function(frame) {
           } else {
             var fingerDiv =  document.getElementById(pointable.id);
             if (typeof(fingerDiv) != 'undefined' && fingerDiv != null) {
-            	$(fingerDiv).css({position:"absolute", left:posX,top:posY});
+            	$(fingerDiv).css({left:posX,top:posY});
               //moveFinger(fingerDiv, posX, posY, posZ, dirX, dirY, dirZ);
 
             }
