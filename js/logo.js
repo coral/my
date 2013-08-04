@@ -2,6 +2,7 @@ var my_logo;
 var width = $(window).width();
 var height = $(window).height();
 var frames, length;
+var running = 1;
 var logo = {
 	initCanvas: function() {
 		var group = project.importSVG(document.getElementById('my_logo'));
@@ -13,7 +14,6 @@ var logo = {
 	},
 
 	animateCanvas: function() {
-	
 
 	}
 
@@ -30,6 +30,12 @@ function onFrame(event) {
 		circle.fillColor = "#FF0000";
 		circle.position.x = my_logo.getLocationAt(frames*event.count).point.x;
 		circle.position.y = my_logo.getLocationAt(frames*event.count).point.y;
+	} else {
+		if(running)
+		{
+			$('#canvas').delay(1000).transition({ opacity: 0 },1000, 'ease');
+			running = 0;
+		}
 	}
-	view.zoom = event.count / 300 + 0.1;
+	view.zoom = event.count / 300 + 1;
 }
