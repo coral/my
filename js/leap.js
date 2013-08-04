@@ -9,7 +9,7 @@ Leap.loop(function(frame) {
         for (var pointableId = 0, pointableCount = frame.pointables.length; pointableId != pointableCount; pointableId++) {
           var pointable = frame.pointables[pointableId];
           var posX = (pointable.stabilizedTipPosition[0]*3)+400;
-          var posY = (wHeight-(pointable.stabilizedTipPosition[1]*3))+100;
+          var posY = (wHeight-(pointable.stabilizedTipPosition[1]*3))+200;
           var posZ = (pointable.stabilizedTipPosition[2]*3)-400;
           var dirX = -(pointable.direction[0]*90);
           var dirY = -(pointable.direction[1]*90);
