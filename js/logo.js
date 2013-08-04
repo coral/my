@@ -3,6 +3,7 @@ var width = $(window).width();
 var height = $(window).height();
 var frames, length;
 var running = 1;
+var removed = 0;
 var logo = {
 	initCanvas: function() {
 		var group = project.importSVG(document.getElementById('my_logo'));
@@ -35,7 +36,7 @@ function onFrame(event) {
 		{
 			$('#canvas').delay(1000).transition({ opacity: 0 },1000, 'ease');
 			running = 0;
-		}
+		} 
 	}
 	view.zoom = event.count / 300 + 1;
 }
