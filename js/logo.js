@@ -36,7 +36,11 @@ function onFrame(event) {
 		{
 			$('#canvas').delay(1000).transition({ opacity: 0 },1000, 'ease');
 			running = 0;
-		} 
+		} else if (running == 0 && removed == 0) {
+			setTimeout(function() {
+				$('#canvas').remove();
+			}, 3000);
+		}
 	}
 	view.zoom = event.count / 300 + 1;
 }
