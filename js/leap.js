@@ -1,47 +1,45 @@
-var cb = {
+var fingers = {};
+var wHeight = $(window).height();
+Leap.loop(function(frame) {
+	latestFrame = frame;
+	//document.getElementById('out').innerHTML = "<div>"+latestFrame.dump()+"</div>";
 
-	initCanvas: function() {
-		cb.paper = Raphael("viz", 640, 480);
-	},
+	var fingerIds = {};
 
-	initLeap: function() {
-		// Leap controller initialization options
-		var controllerOptions = { enableGestures: true };
-		var controller = new Leap.Controller(controllerOptions);
-		cb.controller = controller;
+        for (var pointableId = 0, pointableCount = frame.pointables.length; pointableId != pointableCount; pointableId++) {
+          var pointable = frame.pointables[pointableId];
+          var posX = (pointable.stabilizedTipPosition[0]*3)+400;
+          var posY = wHeight-(pointable.stabilizedTipPosition[1]*3);
+          var posZ = (pointable.stabilizedTipPosition[2]*3)-400;
+          var dirX = -(pointable.direction[0]*90);
+          var dirY = -(pointable.direction[1]*90);
+          var dirZ = (pointable.direction[2]*90);
+          var finger = fingers[pointable.id];
+          if (!finger) {
+            var fingerDiv = document.getElementById("finger").cloneNode(true);
+                fingerDiv.setAttribute('id',pointable.id);
+                fingerDiv.style.backgroundColor='#'+Math.floor(Math.random()*16777215).toString(16);
+                document.getElementById('container').appendChild(fingerDiv);
+                fingers[pointable.id] = pointable.id;
+          } else {
+            var fingerDiv =  document.getElementById(pointable.id);
+            if (typeof(fingerDiv) != 'undefined' && fingerDiv != null) {
+            	$(fingerDiv).css({position:"absolute", left:posX,top:posY});
+              //moveFinger(fingerDiv, posX, posY, posZ, dirX, dirY, dirZ);
 
-		cb.frameHandlerRef = controller.on('animationFrame', cb.gotFrame);
-		controller.connect();
-	},
+            }
+          }
+          fingerIds[pointable.id] = true;
+        }
+        for (fingerId in fingers) {
+          if (!fingerIds[fingerId]) {
+          	
+            var fingerDiv =  document.getElementById(fingers[fingerId]);
+            fingerDiv.parentNode.removeChild(fingerDiv);
+           
+            delete fingers[fingerId];
+          }
+        }
 
-	gotFrame: function(frame) {
-		if (! frame.hands.length) return;
 
-		var paper = cb.paper;
-		var paperWidth = $("#viz").width();
-		var paperHeight = $("#viz").height();
-		paper.clear();
-
-		// draw fingers
-		for (var i = 0; i < frame.hands.length; i++) {
-			var hand = frame.hands[i];
-			for (var i = 0; i < hand.pointables.length; i++) {
-				var pointable = hand.pointables[i];
-
-				var pos = pointable.tipPosition;
-				var pointX = pos.x + 200;
-				var pointY = 400 - pos.y;
-				var pointRadius = (pos.z + 200) / 10;
-
-				var circle = paper.circle(pointX, pointY, pointRadius);
-				circle.attr("stroke", "#00c");
-			}
-		}
-	}
-};
-
-$(function() {
-	cb.initCanvas();
-	cb.initLeap();
 });
-

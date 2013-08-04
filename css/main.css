@@ -210,6 +210,10 @@ textarea {
     *zoom: 1;
 }
 
+.svg_hide {
+    display: none;
+}
+
 /* ==========================================================================
    EXAMPLE Media Queries for Responsive Design.
    These examples override the primary ('mobile first') styles.

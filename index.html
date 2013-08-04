@@ -1,32 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>My</title>
-            <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width" />
-    <!-- Include the stylesheets you need for the Views components -->
-    <!-- See https://developer.spotify.com/technologies/apps/docs/preview/views/ -->
-    <link rel="stylesheet" href="$views/css/image.css">
-    <link rel="stylesheet" href="$views/css/list.css">
-    <link rel="stylesheet" href="$views/css/buttons.css">
-    <!-- <link rel="stylesheet" href="$views/css/throbber.css"> -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/main.css" />
+    <title>
+      M
+    </title>
 
-    <script src="js/modernizr-2.6.2.min.js"></script>
-    <!-- If you are using the preview SDK for webplayer then uncomment the script below -->
-    <!--script src="http://d1hza3lyffsoht.cloudfront.net/preview-sdk/bootstrap.js"></script-->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width" />
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/leap.css">
+
+
   </head>
   <body>
-    <div id="viz" style="width: 100%; height: 100%;">.</div>
+    <svg version="1.1" id="my_logo" class="svg_hide" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+     width="250px" height="250px" viewBox="0 0 250 250" enable-background="new 0 0 250 250" xml:space="preserve">
+      <path fill="none" stroke="none" stroke-miterlimit="10" d="M6.5,177.25c0,0,18-50,22.75-71.25S38,48.75,46.75,37.25
+    S79.75,4,80.5,43s-5,69.5-5,69.5S94,58.25,101.25,46.25s24.75-19.75,29.5-17.5s15,8.75,7.25,48.25s-22.716,84.624-21.75,102.25
+    c1,18.25,5.75,30.75,20.75,28.5s24.75-8.5,22-36.75s2-57,3.25-62.75s1.25-3.5,0,11.75s-3.75,45.199-1.5,53.6s9.5,11.65,17.5,1.9
+    s16.5-43.75,22.5-57.5s8.25-12.25,7.5-0.5s-0.25,103.25-13.5,114.25s-22.25,13.75-23.25,1.75s24.278-38.5,36.889-50.5
+    s20.861-27.5,27.361-43.25s8-18.25,8-18.25"/>
+    </svg>
 
-    <script src="js/jquery-2.0.3.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+
+    <div id="container">
+      <h1>
+        COOL
+      </h1>
+        <div id="finger" class="cube finger">
+          <div class="face tp"></div>
+          <div class="face lt"></div>
+          <div class="face rt"></div>
+          <div class="face ft"></div>
+          <div class="face bk"></div>
+        </div>
+        <canvas id="canvas" width="1000px" height="700x"></canvas>
+      <div id="out"></div>
+    </div>
+    
+    <script src="js/libs/jquery-2.0.3.min.js"></script>
+    <script src="js/libs/bootstrap.min.js"></script>
     <script src="js/libs/leapjs/leap.min.js"></script>
-    <script src="js/raphael-min.js"></script>
+    <script src="js/libs/paperjs-v0.9.9/dist/paper.js"></script>
     <script src="js/leap.js"></script>
+    <script type="text/paperscript" src="js/logo.js" canvas="canvas"></script>
   </body>
 </html>
