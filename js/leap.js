@@ -1,6 +1,7 @@
 $(function(){
   var fingerIds,
       timeout,
+      controller,
       fingers = {},
       wHeight = $(window).height(),
       $moodChooser = $('#mood-chooser');
@@ -63,9 +64,15 @@ $(function(){
 
   }());
 
-  Leap.loop(function(frame) {
-  document.getElementById('out').innerHTML = "<div>"+(latestFrame).dump()+"</div>";
+  controller = new Leap.Controller({enableGestures: true});
+
+  controller.loop(function(frame) {
+
     fingerIds = {};
+
+    for(var i = 0, l = frame.gestures.length; i !== l; i++) {
+      if(frame.gestures[i].type === 'swipe' || frame.gestures[i].type === 'circle') document.body.className = '';
+    }
 
     for (var pointableId = 0, pointableCount = frame.pointables.length; pointableId != pointableCount; pointableId++) {
       var pointable = frame.pointables[pointableId];
@@ -78,6 +85,7 @@ $(function(){
       var finger = fingers[pointable.id];
 
       if(pointableId === 0) {
+       if(frame.gestures[0]) console.log(frame.gestures);
         setMoodPosition(posX, posY);
         if(document.body.classList[0] === 'cover') document.body.classList.remove('cover');
       }
