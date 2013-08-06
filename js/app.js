@@ -23,9 +23,9 @@ var app = {
 		}
 
 		if(valence >= 0.9) {
-			maxvalencez = valence;
+			maxvalence = valence;
 		} else {
-			maxvalencez = valence + 0.1;
+			maxvalence = valence + 0.1;
 		}
 
 
@@ -83,8 +83,14 @@ var app = {
 	},
 
 	presentSongs: function(t, cb) {
-
+		console.log(t.toArray());
 		cb(t.toArray());
+	},
+
+	fetchBiometrics: function(cb) {
+		$.getJSON('http://77.80.253.74/files/oa/f.php', function(data) {
+				cb(data);
+		});
 	},
 
 	queryEchonest: function(artists, cb) {
@@ -100,21 +106,26 @@ var app = {
 
 		}
 
-		//http://developer.echonest.com/api/v4/playlist/static?api_key=7XGOU94ICDTSF1A2I&artist=weezer&artist=Kraftwerk&artist=Peter%20Tosh&format=json&results=2&type=artist-radio&bucket=id:spotify-WW&bucket=tracks&limit=true&max_energy=.5&min_energy=.1&max_valence=.3&min_valence=.1
-
-		$.getJSON('http://developer.echonest.com/api/v4/playlist/' +
-			'static?api_key=7XGOU94ICDTSF1A2I' +
-			add +
-			'&format=json' +
-			'&results=10' +
-			'&type=artist-radio' +
-			'&max_energy=' + maxenergy +
-			'&min_energy=' + minenergy +
-			'&min_valence=' + minvalence +
-			'&max_valence=' + maxvalence +
-			'&bucket=id:spotify-WW&bucket=tracks&limit=true'
-			, function(data) {
-				app.parseTasteProfile(data, cb);
+		app.fetchBiometrics(function(biometrics){
+			console.log(biometrics);
+			$.getJSON('http://developer.echonest.com/api/v4/playlist/' +
+				'static?api_key=7XGOU94ICDTSF1A2I' +
+				add +
+				'&format=json' +
+				'&results=10' +
+				'&type=artist-radio' +
+				'&max_energy=' + maxenergy +
+				'&min_energy=' + minenergy +
+				'&min_valence=' + minvalence +
+				'&max_valence=' + maxvalence +
+				'&bucket=id:spotify-WW&bucket=tracks&limit=true'
+				, function(data) {
+					app.parseTasteProfile(data, cb);
+			});
 		});
 	}
 };
+
+$(function() {
+	app.buildSuggestions(0.8, 0.9);
+});
