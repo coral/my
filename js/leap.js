@@ -30,6 +30,10 @@ $(function(){
 
           clearTimeout(timeout);
 
+          $decideBar.css({'-webkit-transition': 'width 0', 'width': 0 });
+
+          _.defer(function(){ $decideBar.css({'-webkit-transition': 'width 2000ms', 'width': '100%' }); });
+
           timeout = setTimeout(function(){
 
             document.body.classList.add('decided');

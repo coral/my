@@ -26,6 +26,16 @@ body.decided #mood-chooser {
   height: 40px;
 }
 
+
+#decide-bar {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 0;
+  height: 5px;
+  background: red;
+}
+
 #mood-chooser img {
   margin: 5.8% 12%;
   padding: 2%;
