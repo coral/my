@@ -10,6 +10,7 @@ body.cover #track-list li{
   height: 100%;
   left: 0;
   top: 0;
+  z-index: 1;
 }
 #top {
   position: absolute;
@@ -37,7 +38,6 @@ body.cover #track-list li{
   margin-right: 10px;
 }
 #track-list {
-  z-index: -1;
   list-style: none;
   padding: 0;
   margin: 0;
