@@ -1,14 +1,18 @@
-var sp, models, views;
-
 var app = {
 
 	initSpotify: function() {
-		sp = getSpotifyApi();
-		models = sp.require('$api/models');
-		views = sp.require('$api/views');
+		require(['$api/toplists'], function(toplists) {
+
+			var list = toplists.Toplist.forCurrentUser();
+			list.tracks.snapshot().done(function(tracks) {
+			  for (var i = 0; i < tracks.length; i++)
+			    console.log(tracks.get(i));
+			});
+
+		});
 	},
 
-	buildSuggestions: function() {
+	buildSuggestions: function(energy, valence) {
 		$.getJSON('http://developer.echonest.com/api/v4/song/search' +
 			'?api_key=FILDTEOIK2HBORODV' +
 			'&format=json' +
@@ -16,8 +20,8 @@ var app = {
 			'&artist=radiohead' +
 			'&bucket=id:spotify-WW&bucket=tracks' +
 			'&limit=true' +
-			'&max_energy=.9' +
-			'&max_valence=.1', function(data) {
+			'&max_energy=' + energy +
+			'&max_valence=' + valence, function(data) {
 		  
 			console.log(data);
 		});
@@ -26,5 +30,5 @@ var app = {
 
 $(function() {
 	app.initSpotify();
-	app.buildSuggestions();
+	app.buildSuggestions(0.5, 0.5);
 });
