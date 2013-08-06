@@ -1,0 +1,59 @@
+body.cover #top {
+  top: 0;
+}
+body.cover #track-list li{
+  left: 0;
+}
+#cover {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+#top {
+  position: absolute;
+  -webkit-transition: top 500ms ease;
+  font-size: 11px;
+  line-height: 36px;
+  top: -87px;
+  height: 87px;
+  width: 100%;
+  background: url('../images/cover_top.png') repeat-x top left;
+  text-align: center;
+  z-index: 1;
+}
+#top img {
+  vertical-align: top;
+}
+#playing-from {
+  float: left;
+  margin-left: 10px;
+  color: #a2a2a2;
+}
+#tracks-queued {
+  color: #b7b060;
+  float: right;
+  margin-right: 10px;
+}
+#track-list {
+  z-index: -1;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  /* remove later */
+  overflow: hidden;
+}
+#track-list li {
+  position: relative;
+  height: 25px;
+  -webkit-transition: left 500ms ease;
+}
+#track-list li:nth-child(2n + 1) {
+  background-color: #313131;
+  left: 100%;
+}
+#track-list li:nth-child(2n) {
+  background-color: #373737;
+  left: -100%;
+}

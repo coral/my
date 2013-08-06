@@ -21,6 +21,11 @@ textarea {
 body {
     font-size: 1em;
     line-height: 1.4;
+    background: #313131;
+    overflow: hidden;
+    max-height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 /*
