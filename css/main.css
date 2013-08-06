@@ -19,14 +19,18 @@ textarea {
 }
 
 html {
+<<<<<<< HEAD
   background: #313131;
   height: 100%;
+=======
+  background: #262626;
+>>>>>>> 9be5861319209f04e8715aae5f791bcdd6b7977e
 }
 
 body {
     font-size: 1em;
     line-height: 1.4;
-    background: #313131;
+    background: #262626;
     overflow: hidden;
     max-height: 100%;
     margin: 0;
