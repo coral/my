@@ -68,10 +68,6 @@ $(function(){
 
     fingerIds = {};
 
-    for(var i = 0, l = frame.gestures.length; i !== l; i++) {
-      if(frame.gestures[i].type === 'swipe' || frame.gestures[i].type === 'circle') document.body.className = '';
-    }
-
     for (var pointableId = 0, pointableCount = frame.pointables.length; pointableId != pointableCount; pointableId++) {
       var pointable = frame.pointables[pointableId];
       var posX = (pointable.stabilizedTipPosition[0]*3)+400;
