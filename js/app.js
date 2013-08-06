@@ -33,7 +33,6 @@ var app = {
 
 			var tasteProfilePromise = models.Playlist.createTemporary("temp").done(adder);
 			function adder(tasteProfile) {
-				console.log(tasteProfile);
 				var songs = callback.response.songs;
 				tasteProfile.load("tracks").done(tracksLoaded)
 				function tracksLoaded()
@@ -44,9 +43,10 @@ var app = {
 						st = st.replace("spotify-WW","spotify");
 
 						tasteProfile.tracks.add(models.Track.fromURI(st));
-						console.log(tasteProfile);
+						
 
 					}
+					
 				}
 			}
 			
