@@ -25,7 +25,7 @@ $(function(){
         $valance.text('valance: ' + valancy);
         $energy.text('energy: ' + energy);
 
-        $body.css('background-color', 'hsl(' + (360 - Math.round(valancy * - 360)) + ',' + Math.round(energy * 80) + '%, 50%)');
+        $body.css('background-color', 'hsl(' + (234 + 360 - Math.round(valancy * 200)) + ',' + Math.round(energy * 80) + '%, 50%)');
 
       }
     }
