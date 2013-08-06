@@ -62,8 +62,9 @@ $(function(){
     }
 
   }());
-
-  Leap.loop(function(frame) {
+  
+  var controller = new Leap.Controller({enableGestures: true});
+  controller.loop(function(frame) {
   document.getElementById('out').innerHTML = "<div>"+(latestFrame).dump()+"</div>";
     fingerIds = {};
 
