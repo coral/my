@@ -41,12 +41,9 @@ var app = {
 					{
 						var st = songs[i].tracks[0].foreign_id;
 						st = st.replace("spotify-WW","spotify");
-
 						tasteProfile.tracks.add(models.Track.fromURI(st));
-						
-
 					}
-					
+
 				}
 			}
 			
