@@ -9,17 +9,17 @@ var app = {
 	},
 
 	buildSuggestions: function() {
-		$.getJSON('ajax/test.json', function(data) {
-		  var items = [];
-		 
-		  $.each(data, function(key, val) {
-		    items.push('<li id="' + key + '">' + val + '</li>');
-		  });
-		 
-		  $('<ul/>', {
-		    'class': 'my-new-list',
-		    html: items.join('')
-		  }).appendTo('body');
+		$.getJSON('http://developer.echonest.com/api/v4/song/search' +
+			'?api_key=FILDTEOIK2HBORODV' +
+			'&format=json' +
+			'&results=1' +
+			'&artist=radiohead' +
+			'&bucket=id:spotify-WW&bucket=tracks' +
+			'&limit=true' +
+			'&max_energy=.9' +
+			'&max_valence=.1', function(data) {
+		  
+			console.log(data);
 		});
 	}
 };
