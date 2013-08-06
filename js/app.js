@@ -2,11 +2,32 @@ var minenergy, maxenergy, minvalence, maxvalence;
 
 var app = {
 
-	buildSuggestions: function(minenergyz, maxenergyz, minvalencez, maxvalencez, cb) {
-		minenergy = minenergyz;
-		maxenergy = maxenergyz;
-		minvalence = minvalencez;
-		maxvalence = maxvalencez;
+	buildSuggestions: function(energy, valence, cb) {
+		
+		if(energy <= 0.1) {
+			minenergy = energy;
+		} else {
+			minenergy = energy - 0.1;
+		}
+
+		if(energy >= 0.9) {
+			maxenergy = energy;
+		} else {
+			maxenergy = energy + 0.1;
+		}
+
+		if(valence <= 0.1) {
+			minvalence = valence;
+		} else {
+			minvalence = valence - 0.1;
+		}
+
+		if(valence >= 0.9) {
+			maxvalencez = valence;
+		} else {
+			maxvalencez = valence + 0.1;
+		}
+
 
 		require(['$api/toplists'], function(toplists) {
 			var an = new Array();
@@ -62,6 +83,7 @@ var app = {
 	},
 
 	presentSongs: function(t, cb) {
+
 		cb(t.toArray());
 	},
 
