@@ -13,23 +13,48 @@ $(function(){
         left = $moodChooser.position().left,
         right = width + left,
         top = $moodChooser.position().top,
-        bottom = height + top;
+        bottom = height + top,
+        valancy,
+        energy,
+        timeout;
 
     return function(posX, posY){
-        
-Firmin.rotate3d($moodChooser[0], {
-    x:     0.5,
-    z:     0.3,
-    angle: 60
-});
-
-      var valancy = (posX - left) / width,
-          energy = 1 - ((posY - top) / height);
 
       if(posX > left && posX < right && posY > top && posY < bottom) {
 
+
+        if(energy === undefined || Math.abs(energy - (1 - ((posY - top) / height))) > 0.01 || Math.abs(valancy - ((posX - left) / width) > 0.01)) {
+
+          clearTimeout(timeout);
+
+          timeout = setTimeout(function(){
+            document.body.classList.add('decided');
+          }, 2000);
+
+        }
+
+        valancy = (posX - left) / width;
+
+        energy = 1 - ((posY - top) / height);
+
+
         $valance.text('valance: ' + valancy);
+
         $energy.text('energy: ' + energy);
+
+        if(energy < 0.3) {
+          if(valancy < 0.3) $moodChooser[0].className = 'icon-sad';
+          else if(valancy > 0.7) $moodChooser[0].className = 'icon-happy';
+          else $moodChooser[0].className = 'icon-tongue';
+        } else if(energy > 0.7) {
+          if(valancy < 0.3) $moodChooser[0].className = 'icon-angry';
+          else if(valancy > 0.7) $moodChooser[0].className = 'icon-laugh';
+          else $moodChooser[0].className = 'icon-wink';
+        } else {
+          if(valancy < 0.3) $moodChooser[0].className = 'icon-confused';
+          else if(valancy > 0.7) $moodChooser[0].className = 'icon-cool';
+          else $moodChooser[0].className = '';
+        }
 
         $colour.css('color', 'hsl(' + (234 + 360 - Math.round(valancy * 200)) + ',' + Math.round(energy * 80) + '%, 50%)');
 
@@ -52,12 +77,15 @@ Firmin.rotate3d($moodChooser[0], {
       var dirZ = (pointable.direction[2]*90);
       var finger = fingers[pointable.id];
 
-      if(pointableId === 0) setMoodPosition(posX, posY);
+      if(pointableId === 0) {
+        setMoodPosition(posX, posY);
+        if(document.body.classList[0] === 'cover') document.body.classList.remove('cover');
+      }
 
       if (!finger) {
         var fingerDiv = document.getElementById("finger").cloneNode(true);
             fingerDiv.setAttribute('id',pointable.id);
-            fingerDiv.style.backgroundColor='#'+Math.floor(Math.random()*16777215).toString(16);
+            fingerDiv.setAttribute('class','finger');
             document.getElementById('container').appendChild(fingerDiv);
             fingers[pointable.id] = pointable.id;
       } else {

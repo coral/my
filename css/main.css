@@ -15,32 +15,37 @@ button,
 input,
 select,
 textarea {
-    color: #222;
+    color: #fff;
 }
 
 html {
-<<<<<<< HEAD
-  background: #313131;
+  background: #111;
   height: 100%;
-=======
-  background: #262626;
->>>>>>> 9be5861319209f04e8715aae5f791bcdd6b7977e
 }
 
 body {
-    font-size: 1em;
-    line-height: 1.4;
-    background: #262626;
-    overflow: hidden;
-    max-height: 100%;
-    margin: 0;
-    padding: 0;
-    height: 100%;
+  font-size: 1em;
+  line-height: 1.4;
+  background: #111;
+  overflow: hidden;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  height: 100%;
 }
 
 #container {
     -webkit-perspective: 800;
 }
+
+.finger {
+  background-color: rgba(255,255,255,0.6);
+}
+
+.hidden {
+  display: none;
+}
+
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.

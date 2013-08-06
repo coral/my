@@ -42,19 +42,19 @@
 
     <div id="container">
       <div id="mood-chooser">
-        <img src="images/angry.png">
-        <img src="images/wink.png">
-        <img src="images/laugh.png"><br>
-        <img src="images/confused.png">
-        <div id="colour">&bull;</div>
-        <img src="images/cool.png"><br>
-        <img src="images/sad.png">
-        <img src="images/tongue.png">
-        <img src="images/happy.png">
+        <img class="angry" src="images/angry.png">
+        <img class="wink" src="images/wink.png">
+        <img class="laugh" src="images/laugh.png"><br>
+        <img class="confused" src="images/confused.png">
+        <div id="colour">MY</div>
+        <img class="cool" src="images/cool.png"><br>
+        <img class="sad" src="images/sad.png">
+        <img class="tongue" src="images/tongue.png">
+        <img class="happy" src="images/happy.png">
         <span id="valence"></span>
         <span id="energy"></span>
       </div>
-        <div id="finger" class="cube finger">
+        <div id="finger" class="cube finger hidden">
           <div class="face tp"></div>
           <div class="face lt"></div>
           <div class="face rt"></div>
@@ -75,12 +75,5 @@
     <script src="js/leap.js"></script>
     <script src="js/app.js"></script>
     <script type="text/paperscript" src="js/logo.js" canvas="canvas"></script>
-    <script>
-      $(function(event) {
-        document.addEventListener("click", function(event) {
-          document.body.classList.remove('cover');
-        });
-      });
-    </script>
   </body>
 </html>
