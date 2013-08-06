@@ -14,6 +14,12 @@ $(function(){
         right = width + left,
         top = $moodChooser.position().top,
         bottom = height + top;
+        
+Firmin.rotate3d($moodChooser[0], {
+    x:     0.5,
+    z:     0.3,
+    angle: 60
+});
 
     return function(posX, posY){
 

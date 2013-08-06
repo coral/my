@@ -34,6 +34,9 @@ body {
     height: 100%;
 }
 
+#container {
+    -webkit-perspective: 800;
+}
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
  * These selection rule sets have to be separate.
