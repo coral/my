@@ -28,7 +28,6 @@ var app = {
 			maxvalence = valence + 0.1;
 		}
 
-
 		require(['$api/toplists'], function(toplists) {
 			var an = new Array();
 			var list = toplists.Toplist.forCurrentUser();
@@ -83,7 +82,6 @@ var app = {
 	},
 
 	presentSongs: function(t, cb) {
-		console.log(t.toArray());
 		cb(t.toArray());
 	},
 
@@ -107,7 +105,6 @@ var app = {
 		}
 
 		app.fetchBiometrics(function(biometrics){
-			console.log(biometrics);
 			$.getJSON('http://developer.echonest.com/api/v4/playlist/' +
 				'static?api_key=7XGOU94ICDTSF1A2I' +
 				add +
