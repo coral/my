@@ -6,6 +6,7 @@
   -webkit-transition: opacity 500ms ease;
   opacity: 1;
   -webkit-transition-delay: 1000ms;
+  padding-top: 40px;
 }
 
 body.cover #mood-chooser {
@@ -15,6 +16,14 @@ body.cover #mood-chooser {
 body.decided #mood-chooser {
   opacity: 0;
   -webkit-transition-delay: 0;
+}
+
+#mood-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
 }
 
 #mood-chooser img {
@@ -46,14 +55,4 @@ body.decided #mood-chooser {
   text-align: center;
   line-height: 45px;
   vertical-align: middle;
-}
-
-#mood-chooser span {
-  position: absolute;
-  display: block;
-  left: 0;
-  top: 0;
-}
-#mood-chooser #energy {
-  top: 20px;
 }

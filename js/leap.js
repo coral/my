@@ -5,6 +5,7 @@ $(function(){
       wHeight = $(window).height(),
       fingerColor = '#fff',
       $moodChooser = $('#mood-chooser'),
+      $moodBar = $('#mood-bar'),
       $fingers = $('.finger');
 
   var setMoodPosition = (function(){
@@ -39,10 +40,7 @@ $(function(){
 
         energy = 1 - ((posY - top) / height);
 
-
-        $valance.text('valance: ' + valancy);
-
-        $energy.text('energy: ' + energy);
+        //app.buildSuggestions(valancy, energy, function(suggestions){ console.log(suggestions); });
 
         if(energy < 0.3) {
           if(valancy < 0.3) $moodChooser[0].className = 'icon-sad';
@@ -88,6 +86,8 @@ $(function(){
         setMoodPosition(posX, posY);
         if(document.body.classList[0] === 'cover') document.body.classList.remove('cover');
       }
+
+      $moodBar.css('background-color', fingerColor);
 
       $($fingers[pointableId]).css({opacity:'1',left:posX,top:posY,'background-color':fingerColor});
 

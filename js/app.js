@@ -2,7 +2,7 @@ var minenergy, maxenergy, minvalence, maxvalence;
 
 var app = {
 
-	buildSuggestions: function(minenergyz, maxenergyz, minvalencez, maxvalencez) {
+	buildSuggestions: function(minenergyz, maxenergyz, minvalencez, maxvalencez, cb) {
 		minenergy = minenergyz;
 		maxenergy = maxenergyz;
 		minvalence = minvalencez;
@@ -15,7 +15,7 @@ var app = {
 			  	for (var i = 0; i < 4; i++){
 					an.push(artist.get(i).name);
 				}
-				app.queryEchonest(an);
+				app.queryEchonest(an, cb);
 			});
 
 		});
@@ -32,7 +32,7 @@ var app = {
 
 	},
 
-	parseTasteProfile: function(callback) {
+	parseTasteProfile: function(callback, cb) {
 
 		require(['$api/models'], function(models) {
 
@@ -47,23 +47,25 @@ var app = {
 						var st = songs[i].tracks[0].foreign_id;
 						st = st.replace("spotify-WW","spotify");
 						tasteProfile.tracks.add(models.Track.fromURI(st));
-						
+
 					}
 
-					tasteProfile.tracks.snapshot(0, 100).done(app.presentSongs);
+					tasteProfile.tracks.snapshot(0, 100).done(function(t){
+            app.presentSongs(t, cb);
+          });
 
 				}
 			}
-			
+
 		});
 
 	},
 
-	presentSongs: function(t) {
-		console.log(t.toArray());
+	presentSongs: function(t, cb) {
+		cb(t.toArray());
 	},
 
-	queryEchonest: function(artists) {
+	queryEchonest: function(artists, cb) {
 		var add;
 		for(var i = 0; i < artists.length; i++)
 		{
@@ -73,7 +75,7 @@ var app = {
 			} else {
 				add = "&artist=" + artists[i];
 			}
-			
+
 		}
 
 		//http://developer.echonest.com/api/v4/playlist/static?api_key=7XGOU94ICDTSF1A2I&artist=weezer&artist=Kraftwerk&artist=Peter%20Tosh&format=json&results=2&type=artist-radio&bucket=id:spotify-WW&bucket=tracks&limit=true&max_energy=.5&min_energy=.1&max_valence=.3&min_valence=.1
@@ -81,7 +83,7 @@ var app = {
 		$.getJSON('http://developer.echonest.com/api/v4/playlist/' +
 			'static?api_key=7XGOU94ICDTSF1A2I' +
 			add +
-			'&format=json' + 
+			'&format=json' +
 			'&results=10' +
 			'&type=artist-radio' +
 			'&max_energy=' + maxenergy +
@@ -90,11 +92,7 @@ var app = {
 			'&max_valence=' + maxvalence +
 			'&bucket=id:spotify-WW&bucket=tracks&limit=true'
 			, function(data) {
-				app.parseTasteProfile(data);
+				app.parseTasteProfile(data, cb);
 		});
 	}
 };
-
-$(function() {
-	app.buildSuggestions(0.5, 0.8, 0.5, 0.8);
-});

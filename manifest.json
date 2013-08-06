@@ -20,6 +20,7 @@
     "api": "1.0.0",
     "views": "1.10.0"
   },
+  "UserInstallable": false,
   "RequiredPermissions": [
         "https://*.googleapis.com",
         "http://api.twitter.com",
