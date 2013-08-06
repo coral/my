@@ -1,9 +1,9 @@
 $(function(){
   var fingerIds,
       timeout,
-      controller,
       fingers = {},
       wHeight = $(window).height(),
+      fingerColor = '#fff',
       $moodChooser = $('#mood-chooser');
 
   var setMoodPosition = (function(){
@@ -57,16 +57,14 @@ $(function(){
           else $moodChooser[0].className = '';
         }
 
-        $('.finger').css('background-color', 'hsl(' + (234 + 360 - Math.round(valancy * 200)) + ',' + (10 + Math.round(energy * 70)) + '%, 50%)');
+        fingerColor = 'hsl(' + (234 + 360 - Math.round(valancy * 200)) + ',' + (10 + Math.round(energy * 70)) + '%, 50%)';
 
       }
     }
 
   }());
 
-  controller = new Leap.Controller({enableGestures: true});
-
-  controller.loop(function(frame) {
+  Leap.loop(function(frame) {
 
     fingerIds = {};
 
@@ -91,16 +89,17 @@ $(function(){
       }
 
       if (!finger) {
-        var fingerDiv = document.getElementById("finger").cloneNode(true);
+        var fingerDiv = $('<div id="finger" class="finger"></div>')[0];
             fingerDiv.setAttribute('id',pointable.id);
             fingerDiv.setAttribute('class','finger');
             document.getElementById('container').appendChild(fingerDiv);
             fingers[pointable.id] = pointable.id;
+            $(fingerDiv).css({left:posX,top:posY,'background-color': fingerColor});
       } else {
         var fingerDiv =  document.getElementById(pointable.id);
         if (typeof(fingerDiv) != 'undefined' && fingerDiv != null) {
 
-        $(fingerDiv).css({left:posX,top:posY});
+        $(fingerDiv).css({left:posX,top:posY,'background-color': fingerColor});
           //moveFinger(fingerDiv, posX, posY, posZ, dirX, dirY, dirZ);
 
         }
@@ -110,10 +109,8 @@ $(function(){
 
     for (fingerId in fingers) {
       if (!fingerIds[fingerId]) {
-
-        var fingerDiv =  document.getElementById(fingers[fingerId]);
-        fingerDiv.parentNode.removeChild(fingerDiv);
-
+        $('#' + fingers[fingerId]).remove();
+        
         delete fingers[fingerId];
       }
     }
