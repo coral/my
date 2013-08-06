@@ -47,7 +47,7 @@ body.cover #track-list li{
 #track-list li {
   position: relative;
   height: 25px;
-  -webkit-transition: left 500ms ease;
+  -webkit-transition: left 500ms ease 300ms;
 }
 #track-list li:nth-child(2n + 1) {
   background-color: #313131;

@@ -1,11 +1,13 @@
 $(function(){
   var fingerIds,
+      timeout,
       fingers = {},
-      wHeight = $(window).height();
+      wHeight = $(window).height(),
+      $moodChooser = $('#mood-chooser'),
+      multipleFingers = false;
 
   var setMoodPosition = (function(){
     var $colour = $('#colour'),
-        $moodChooser = $('#mood-chooser'),
         $valance = $('#valence'),
         $energy = $('#energy'),
         height = $moodChooser.height(),
@@ -15,8 +17,7 @@ $(function(){
         top = $moodChooser.position().top,
         bottom = height + top,
         valancy,
-        energy,
-        timeout;
+        energy;
 
     return function(posX, posY){
 
@@ -56,7 +57,7 @@ $(function(){
           else $moodChooser[0].className = '';
         }
 
-        $colour.css('color', 'hsl(' + (234 + 360 - Math.round(valancy * 200)) + ',' + Math.round(energy * 80) + '%, 50%)');
+        $('.finger').css('background-color', 'hsl(' + (234 + 360 - Math.round(valancy * 200)) + ',' + Math.round(energy * 80) + '%, 50%)');
 
       }
     }
@@ -68,6 +69,7 @@ $(function(){
     fingerIds = {};
 
     for (var pointableId = 0, pointableCount = frame.pointables.length; pointableId != pointableCount; pointableId++) {
+
       var pointable = frame.pointables[pointableId];
       var posX = (pointable.stabilizedTipPosition[0]*3)+400;
       var posY = (wHeight-(pointable.stabilizedTipPosition[1]*3))+200;
@@ -83,11 +85,13 @@ $(function(){
       }
 
       if (!finger) {
-        var fingerDiv = document.getElementById("finger").cloneNode(true);
-            fingerDiv.setAttribute('id',pointable.id);
-            fingerDiv.setAttribute('class','finger');
-            document.getElementById('container').appendChild(fingerDiv);
-            fingers[pointable.id] = pointable.id;
+        if(pointableId === 0 || multipleFingers) {
+          var fingerDiv = document.getElementById("finger").cloneNode(true);
+              fingerDiv.setAttribute('id',pointable.id);
+              fingerDiv.setAttribute('class','finger');
+              document.getElementById('container').appendChild(fingerDiv);
+              fingers[pointable.id] = pointable.id;
+        }
       } else {
         var fingerDiv =  document.getElementById(pointable.id);
         if (typeof(fingerDiv) != 'undefined' && fingerDiv != null) {
@@ -108,6 +112,8 @@ $(function(){
         delete fingers[fingerId];
       }
     }
+
+    if(_.isEmpty(fingers)) { clearTimeout(timeout); $moodChooser[0].className = ''; }
 
 
   });
