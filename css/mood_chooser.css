@@ -3,8 +3,9 @@
   color: white;
   width: 100%;
   height: 100%;
-  -webkit-transition: opacity 500ms ease 1000ms;
+  -webkit-transition: opacity 500ms ease;
   opacity: 1;
+  -webkit-transition-delay: 1000ms;
 }
 
 body.cover #mood-chooser {
@@ -13,6 +14,7 @@ body.cover #mood-chooser {
 
 body.decided #mood-chooser {
   opacity: 0;
+  -webkit-transition-delay: 0;
 }
 
 #mood-chooser img {
