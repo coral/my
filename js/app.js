@@ -8,9 +8,9 @@ var app = {
 		require(['$api/toplists'], function(toplists) {
 
 			var list = toplists.Toplist.forCurrentUser();
-			list.tracks.snapshot().done(function(tracks) {
-			  for (var i = 0; i < tracks.length; i++)
-			    app.processTest(tracks.get(i));
+			list.artists.snapshot().done(function(artist) {
+			  for (var i = 0; i < artist.length; i++)
+			    app.buildTasteProfile(artist.get(i));
 			});
 
 		});
@@ -20,8 +20,8 @@ var app = {
 
 		require(['$api/models'], function(models) {
 
-		  var playlist = models.Playlist.fromURI(playlistURI);
-		  models.player.playContext(playlist);
+			var playlist = models.Playlist.fromURI(playlistURI);
+			models.player.playContext(playlist);
 
 		});
 
@@ -62,14 +62,27 @@ var app = {
 			'&max_valence=' + maxvalence +
 			'&bucket=id:spotify-WW&bucket=tracks&limit=true'
 			, function(data) {
-		  
-			app.parseTasteProfile(data);
+				app.parseTasteProfile(data);
 		});
 	},
 
-	processTest: function(wat)
+	buildTasteProfile: function(wat)
 	{
 		console.log(wat);
+/*
+		$.getJSON('http://developer.echonest.com/api/v4/song/' +
+			'search?api_key=7XGOU94ICDTSF1A2I' +
+			'&format=json' + 
+			'&results=10' +
+			'&max_energy=' + maxenergy +
+			'&min_energy=' + minenergy +
+			'&min_valence=' + minvalence +
+			'&max_valence=' + maxvalence +
+			'&bucket=id:spotify-WW&bucket=tracks&limit=true'
+			, function(data) {
+				app.parseTasteProfile(data);
+		});
+*/
 	}
 };
 
