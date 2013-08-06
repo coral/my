@@ -20,6 +20,7 @@ textarea {
 
 html {
   background: #313131;
+  height: 100%;
 }
 
 body {
@@ -30,6 +31,7 @@ body {
     max-height: 100%;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
 /*

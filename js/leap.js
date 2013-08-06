@@ -4,7 +4,7 @@ $(function(){
       wHeight = $(window).height();
 
   var setMoodPosition = (function(){
-    var $body = $(document.body),
+    var $colour = $('#colour'),
         $moodChooser = $('#mood-chooser'),
         $valance = $('#valence'),
         $energy = $('#energy'),
@@ -25,7 +25,7 @@ $(function(){
         $valance.text('valance: ' + valancy);
         $energy.text('energy: ' + energy);
 
-        $body.css('background-color', 'hsl(' + (234 + 360 - Math.round(valancy * 200)) + ',' + Math.round(energy * 80) + '%, 50%)');
+        $colour.css('color', 'hsl(' + (234 + 360 - Math.round(valancy * 200)) + ',' + Math.round(energy * 80) + '%, 50%)');
 
       }
     }
@@ -46,7 +46,7 @@ $(function(){
       var dirZ = (pointable.direction[2]*90);
       var finger = fingers[pointable.id];
 
-      setMoodPosition(posX, posY);
+      if(pointableId === 0) setMoodPosition(posX, posY);
 
       if (!finger) {
         var fingerDiv = document.getElementById("finger").cloneNode(true);
