@@ -29,33 +29,44 @@ var app = {
 
 	parseTasteProfile: function(callback) {
 
-		require(['$api/playlist'], function(playlist) {
+		require(['$api/models'], function(models) {
 
-			var tasteProfile = playlist.createTemporary("temp");
-			for (var i = 0; i < callback.length; i++)
-			{
-				//callback något
-				//var st = callback.i.blah
-				st = st.replace("spotify-WW","spotify");
-				tasteProfile.tracks.add(models.Track.fromURI(st));
+			var tasteProfilePromise = models.Playlist.createTemporary("temp").done(adder);
+			function adder(tasteProfile) {
+				console.log(tasteProfile);
+				var songs = callback.response.songs;
+				tasteProfile.load("tracks").done(tracksLoaded)
+				function tracksLoaded()
+				{
+					for (var i = 0; i < songs.length; i++)
+					{
+						var st = songs[i].tracks[0].foreign_id;
+						st = st.replace("spotify-WW","spotify");
 
+						tasteProfile.tracks.add(models.Track.fromURI(st));
+						console.log(tasteProfile);
+
+					}
+				}
 			}
-		}
+			
+		});
 
 	},
 
-	buildSuggestions: function(energy, valence) {
-		$.getJSON('http://developer.echonest.com/api/v4/song/search' +
-			'?api_key=FILDTEOIK2HBORODV' +
-			'&format=json' +
-			'&results=1' +
-			'&artist=radiohead' +
-			'&bucket=id:spotify-WW&bucket=tracks' +
-			'&limit=true' +
-			'&max_energy=' + energy +
-			'&max_valence=' + valence, function(data) {
+	buildSuggestions: function(minenergy, maxenergy, minvalence, maxvalence) {
+		$.getJSON('http://developer.echonest.com/api/v4/song/' +
+			'search?api_key=7XGOU94ICDTSF1A2I' +
+			'&format=json' + 
+			'&results=10' +
+			'&max_energy=' + maxenergy +
+			'&min_energy=' + minenergy +
+			'&min_valence=' + minvalence +
+			'&max_valence=' + maxvalence +
+			'&bucket=id:spotify-WW&bucket=tracks&limit=true'
+			, function(data) {
 		  
-			console.log(data);
+			app.parseTasteProfile(data);
 		});
 	},
 
@@ -68,5 +79,5 @@ var app = {
 $(function() {
 	app.initSpotify();
 	app.getUserToplist();
-	app.buildSuggestions(0.5, 0.5);
+	app.buildSuggestions(0.5, 0.8, 0.5, 0.8);
 });
