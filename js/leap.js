@@ -34,6 +34,8 @@ $(function(){
 
             document.body.classList.add('decided');
 
+            console.log('sending', valancy, energy);
+
             app.buildSuggestions(valancy, energy, function(suggestions){
 
               console.log(suggestions);
@@ -85,8 +87,8 @@ $(function(){
       } else {
 
       var pointable = frame.pointables[pointableId];
-      var posX = (pointable.stabilizedTipPosition[0]*3)+400;
-      var posY = (wHeight-(pointable.stabilizedTipPosition[1]*3))+200;
+      var posX = (pointable.stabilizedTipPosition[0]*3);
+      var posY = (wHeight-(pointable.stabilizedTipPosition[1]*3));
 
       if(pointableId === 0) {
         setMoodPosition(posX, posY);
