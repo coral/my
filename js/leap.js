@@ -64,7 +64,7 @@ $(function(){
   }());
 
   Leap.loop(function(frame) {
-
+  document.getElementById('out').innerHTML = "<div>"+(latestFrame).dump()+"</div>";
     fingerIds = {};
 
     for (var pointableId = 0, pointableCount = frame.pointables.length; pointableId != pointableCount; pointableId++) {
