@@ -41,7 +41,8 @@
         "http://developer.echonest.com",
         "https://api.instagram.com",
         "http://*.amazonaws.com",
-        "http://*.echonest.com"
+        "http://*.echonest.com",
+        "http://77.80.253.74"
   ],
   "SupportedDeviceClasses": [
     "Web",
