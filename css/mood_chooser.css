@@ -27,7 +27,7 @@ body.decided #mood-chooser {
 }
 
 #mood-chooser img {
-  margin: 5.8% 12%;
+  margin: 3.6% 12%;
   padding: 2%;
   border-radius: 5px;
   width: 9%;
@@ -43,16 +43,20 @@ body.decided #mood-chooser {
 #mood-chooser.icon-cool .cool
  {
   width: 15%;
-  margin: 2.8% 9%;
+  margin: 0.6% 9%;
 }
 
-#colour {
+#logo {
   height: 4%;
   width: 33%;
   display: inline-block;
   font-size: 100px;
-  margin: 5.8% 0;
+  margin: 3.8% 0;
   text-align: center;
   line-height: 45px;
   vertical-align: middle;
+}
+
+#logo img {
+  width: 100%;
 }
