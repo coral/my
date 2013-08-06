@@ -2,10 +2,6 @@ var minenergy, maxenergy, minvalence, maxvalence;
 
 var app = {
 
-	initSpotify: function() {
-
-	},
-
 	buildSuggestions: function(minenergyz, maxenergyz, minvalencez, maxvalencez) {
 		minenergy = minenergyz;
 		maxenergy = maxenergyz;
@@ -100,7 +96,5 @@ var app = {
 };
 
 $(function() {
-	app.initSpotify();
 	app.buildSuggestions(0.5, 0.8, 0.5, 0.8);
-	//app.buildSuggestions(0.5, 0.8, 0.5, 0.8);
 });
