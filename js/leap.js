@@ -4,7 +4,8 @@ $(function(){
       fingers = {},
       wHeight = $(window).height(),
       fingerColor = '#fff',
-      $moodChooser = $('#mood-chooser');
+      $moodChooser = $('#mood-chooser'),
+      $fingers = $('.finger');
 
   var setMoodPosition = (function(){
     var $colour = $('#colour'),
@@ -66,52 +67,33 @@ $(function(){
 
   Leap.loop(function(frame) {
 
-    fingerIds = {};
+    for (var pointableId = 0, pointableCount = 5; pointableId != pointableCount; pointableId++) {
 
-    for (var pointableId = 0, pointableCount = frame.pointables.length; pointableId != pointableCount; pointableId++) {
+      if(!frame.pointables[pointableId]) {
+
+        if(pointableId === 0) {
+          clearTimeout(timeout);
+          $moodChooser.attr('class', '');
+        }
+
+        $($fingers[pointableId]).css('opacity', '0');
+
+      } else {
+
       var pointable = frame.pointables[pointableId];
       var posX = (pointable.stabilizedTipPosition[0]*3)+400;
       var posY = (wHeight-(pointable.stabilizedTipPosition[1]*3))+200;
-      var posZ = (pointable.stabilizedTipPosition[2]*3)-400;
-      var dirX = -(pointable.direction[0]*90);
-      var dirY = -(pointable.direction[1]*90);
-      var dirZ = (pointable.direction[2]*90);
-      var finger = fingers[pointable.id];
 
       if(pointableId === 0) {
-       if(frame.gestures[0]) console.log(frame.gestures);
         setMoodPosition(posX, posY);
         if(document.body.classList[0] === 'cover') document.body.classList.remove('cover');
       }
 
-      if (!finger) {
-        var fingerDiv = $('<div id="finger" class="finger"></div>')[0];
-            fingerDiv.setAttribute('id',pointable.id);
-            fingerDiv.setAttribute('class','finger');
-            document.getElementById('container').appendChild(fingerDiv);
-            fingers[pointable.id] = pointable.id;
-            $(fingerDiv).css({left:posX,top:posY,'background-color': fingerColor});
-      } else {
-        var fingerDiv =  document.getElementById(pointable.id);
-        if (typeof(fingerDiv) != 'undefined' && fingerDiv != null) {
+      $($fingers[pointableId]).css({opacity:'1',left:posX,top:posY,'background-color':fingerColor});
 
-        $(fingerDiv).css({left:posX,top:posY,'background-color': fingerColor});
-          //moveFinger(fingerDiv, posX, posY, posZ, dirX, dirY, dirZ);
-
-        }
       }
-      fingerIds[pointable.id] = true;
-    }
 
-    for (fingerId in fingers) {
-      if (!fingerIds[fingerId]) {
-        $('#' + fingers[fingerId]).remove();
-        
-        delete fingers[fingerId];
-      }
     }
-
-    if(_.isEmpty(fingers)) { clearTimeout(timeout); $moodChooser[0].className = ''; }
 
 
   });
