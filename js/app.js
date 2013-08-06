@@ -23,9 +23,9 @@ var app = {
 		}
 
 		if(valence >= 0.9) {
-			maxvalencez = valence;
+			maxvalence = valence;
 		} else {
-			maxvalencez = valence + 0.1;
+			maxvalence = valence + 0.1;
 		}
 
 
