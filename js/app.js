@@ -43,7 +43,7 @@ var app = {
 			var tasteProfilePromise = models.Playlist.createTemporary("temp").done(adder);
 			function adder(tasteProfile) {
 				var songs = callback.response.songs;
-				tasteProfile.load("tracks").done(tracksLoaded)
+				tasteProfile.load("tracks").done(tracksLoaded);
 				function tracksLoaded()
 				{
 					for (var i = 0; i < songs.length; i++)
@@ -51,17 +51,20 @@ var app = {
 						var st = songs[i].tracks[0].foreign_id;
 						st = st.replace("spotify-WW","spotify");
 						tasteProfile.tracks.add(models.Track.fromURI(st));
-						console.log(models.Track.fromURI(st));
+						
 					}
-					tasteProfile.tracks.snapshot().done(function(playlist) {
-						console.log(playlist);
-					});
+
+					tasteProfile.tracks.snapshot(0, 100).done(app.presentSongs);
 
 				}
 			}
 			
 		});
 
+	},
+
+	presentSongs: function(t) {
+		console.log(t.toArray());
 	},
 
 	queryEchonest: function(artists) {
