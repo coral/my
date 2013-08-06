@@ -125,7 +125,3 @@ var app = {
 		});
 	}
 };
-
-$(function() {
-	app.buildSuggestions(0.8, 0.9);
-});
