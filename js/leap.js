@@ -14,14 +14,14 @@ $(function(){
         right = width + left,
         top = $moodChooser.position().top,
         bottom = height + top;
+
+    return function(posX, posY){
         
 Firmin.rotate3d($moodChooser[0], {
     x:     0.5,
     z:     0.3,
     angle: 60
 });
-
-    return function(posX, posY){
 
       var valancy = (posX - left) / width,
           energy = 1 - ((posY - top) / height);
