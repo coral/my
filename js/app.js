@@ -16,6 +16,34 @@ var app = {
 		});
 	},
 
+	playSpotifyPlaylist: function(playlistURI) {
+
+		require(['$api/models'], function(models) {
+
+		  var playlist = models.Playlist.fromURI(playlistURI);
+		  models.player.playContext(playlist);
+
+		});
+
+	},
+
+	parseTasteProfile: function(callback) {
+
+		require(['$api/playlist'], function(playlist) {
+
+			var tasteProfile = playlist.createTemporary("temp");
+			for (var i = 0; i < callback.length; i++)
+			{
+				//callback något
+				//var st = callback.i.blah
+				st = st.replace("spotify-WW","spotify");
+				tasteProfile.tracks.add(models.Track.fromURI(st));
+
+			}
+		}
+
+	},
+
 	buildSuggestions: function(energy, valence) {
 		$.getJSON('http://developer.echonest.com/api/v4/song/search' +
 			'?api_key=FILDTEOIK2HBORODV' +
