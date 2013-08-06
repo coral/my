@@ -31,7 +31,15 @@ $(function(){
           clearTimeout(timeout);
 
           timeout = setTimeout(function(){
+
             document.body.classList.add('decided');
+
+            app.buildSuggestions(valancy, energy, function(suggestions){
+
+              console.log(suggestions);
+
+            });
+
           }, 2000);
 
         }
@@ -39,8 +47,6 @@ $(function(){
         valancy = (posX - left) / width;
 
         energy = 1 - ((posY - top) / height);
-
-        //app.buildSuggestions(valancy, energy, function(suggestions){ console.log(suggestions); });
 
         if(energy < 0.3) {
           if(valancy < 0.3) $moodChooser[0].className = 'icon-sad';

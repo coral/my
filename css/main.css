@@ -35,15 +35,16 @@ body {
   cursor: none;
 }
 
+#container {
+  height: 100%;
+}
+
 .finger {
   background-color: rgba(255,255,255,0.6);
   opacity: 0.8;
   -webkit-transition: opacity 800ms;
 }
 
-.hidden {
-  display: none;
-}
 
 /*
  * Remove text-shadow in selection highlight: h5bp.com/i
