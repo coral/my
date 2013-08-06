@@ -1,12 +1,16 @@
 var app = {
 
 	initSpotify: function() {
+
+	},
+
+	getUserToplist: function() {
 		require(['$api/toplists'], function(toplists) {
 
 			var list = toplists.Toplist.forCurrentUser();
 			list.tracks.snapshot().done(function(tracks) {
 			  for (var i = 0; i < tracks.length; i++)
-			    console.log(tracks.get(i));
+			    app.processTest(tracks.get(i));
 			});
 
 		});
@@ -25,10 +29,16 @@ var app = {
 		  
 			console.log(data);
 		});
+	},
+
+	processTest: function(wat)
+	{
+		console.log(wat);
 	}
 };
 
 $(function() {
 	app.initSpotify();
+	app.getUserToplist();
 	app.buildSuggestions(0.5, 0.5);
 });
