@@ -39,7 +39,22 @@ body {
   height: 100%;
 }
 
+#decide-bar {
+  z-index: 3;
+  position: absolute;
+  left: 0;
+  width: 0;
+  height: 5px;
+  top: 40px;
+  background: red;
+}
+
+body.decided #decide-bar {
+  top: 0;
+}
+
 .finger {
+  z-index: 4;
   background-color: rgba(255,255,255,0.6);
   opacity: 0.8;
   -webkit-transition: opacity 800ms;
