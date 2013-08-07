@@ -73,7 +73,7 @@ var app = {
 					}
 
 					tasteProfile.tracks.add(toSet).done(function(p){
-						tasteProfile.tracks.snapshot(0, 60).done(function(t){
+						tasteProfile.tracks.snapshot(0, 70).done(function(t){
 		            		app.presentSongs(t, cb);
 		          		});
 					});
@@ -125,7 +125,7 @@ var app = {
 				'static?api_key=7XGOU94ICDTSF1A2I' +
 				add +
 				'&format=json' +
-				'&results=10' +
+				'&results=70' +
 				'&type=artist-radio' +
 				'&max_energy=' + maxenergy +
 				'&min_energy=' + minenergy +
