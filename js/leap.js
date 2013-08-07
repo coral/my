@@ -23,8 +23,8 @@ $(function(){
         $moodBar = $('#mood-bar'),
         $fingers = $('.finger');
 
-    document.body.addEventListener("keydown", function(e) {
-console.log(e.keyCode);
+    document.addEventListener("keydown", function(e) {
+
       if(e.keyCode === 32) {
 
         document.body.classList.remove('decided');
@@ -46,15 +46,12 @@ console.log(e.keyCode);
 
       tracks = suggestions;
 
-      models.player.playTrack(suggestions[0]);
-
       for (var i = 0, l = suggestions.length; i !== l; i++) {
 
         if(suggestions[i].image && suggestions[i].name && suggestions[i].artists) {
 
           $tracksDiv.append('<div><span class="track-name">' +
-            suggestions[i].name + '</span><br><span class="artist-name">' +
-            suggestions[i].artists[0].name + '</span><div class="background" style="background-image:url(' +
+            suggestions[i].name + '</span><div class="background" style="background-image:url(' +
             suggestions[i].image + ')""></div></div>');
 
         }
