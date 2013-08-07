@@ -94,6 +94,8 @@ var app = {
 				function tracksLoaded()
 				{
 					var toSet = new Array();
+					
+					toSet.push(models.Track.fromURI("spotify:track:1FOC5ffOapx07qV4Eshhju"));
 					for (var i = 0; i < songs.length; i++)
 					{
 						var st = songs[i].tracks[0].foreign_id;
@@ -170,7 +172,7 @@ var app = {
 };
 
 $(function() {
-	app.buildSuggestions(0.0, 1.0, function(asdf){
+	app.buildSuggestions(1.0, 1.0, function(asdf){
 		console.log(asdf);
 	});
  });
