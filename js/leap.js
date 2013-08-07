@@ -24,7 +24,7 @@ $(function(){
         $fingers = $('.finger');
 
     document.body.addEventListener("keydown", function(e) {
-
+console.log(e.keyCode);
       if(e.keyCode === 32) {
 
         document.body.classList.remove('decided');
