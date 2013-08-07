@@ -6,28 +6,54 @@ var app = {
 		
 		if(energy <= 0.1) {
 			minenergy = energy;
+			minenergy = String(minenergy).substr(1);
+			      if(	minenergy == "1.0")
+       	minenergy = parseInt(minenergy)
+
+	
 		} else {
 			minenergy = energy - 0.1;
+			minenergy = String(minenergy).substr(1);
 		}
-
+    
 		if(energy >= 0.9) {
+		
 			maxenergy = energy;
+	 		maxenergy = String(maxenergy).substr(1);
+      if(maxenergy == "1.0")
+       maxenergy = parseInt(maxenergy)
+	
 		} else {
 			maxenergy = energy + 0.1;
+			maxenergy = String(maxenergy).substr(1);
 		}
 
 		if(valence <= 0.1) {
 			minvalence = valence;
+			minvalence = String(minvalence).substr(1);
+	      if(maxvalence == "1.0")
+       minvalence = parseInt(minvalence)
+   
 		} else {
 			minvalence = valence - 0.1;
+			minvalence = String(minvalence).substr(1);
 		}
 
 		if(valence >= 0.9) {
 			maxvalence = valence;
+  		maxvalence = String(maxvalence).substr(1);
+  		  if(maxvalence == "1.0")
+       maxvalence = parseInt(maxvalence)
+   
+     
 		} else {
 			maxvalence = valence + 0.1;
+			maxvalence = String(maxvalence).substr(1)
 		}
-
+    if(maxenergy == "1.0")
+       maxenergy = parseInt(maxenergy)
+         
+       
 		require(['$api/toplists'], function(toplists) {
 			var an = new Array();
 			var list = toplists.Toplist.forCurrentUser();
@@ -140,7 +166,7 @@ var app = {
 };
 
 $(function() {
-	app.buildSuggestions(1, 1, function(asdf){
+	app.buildSuggestions(1.0, 1.0, function(asdf){
 		console.log(asdf);
 	});
  });
