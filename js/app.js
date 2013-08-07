@@ -56,23 +56,27 @@ var app = {
 
 		require(['$api/models'], function(models) {
 
-			var tasteProfilePromise = models.Playlist.createTemporary("temp").done(adder);
+			var tasteProfilePromise = models.Playlist.createTemporary("temppp" + Math.floor(Math.random()*110)).done(adder);
 			function adder(tasteProfile) {
 				var songs = callback.response.songs;
+
 				tasteProfile.load("tracks").done(tracksLoaded);
 				function tracksLoaded()
 				{
+					var toSet = new Array();
 					for (var i = 0; i < songs.length; i++)
 					{
 						var st = songs[i].tracks[0].foreign_id;
 						st = st.replace("spotify-WW","spotify");
-						tasteProfile.tracks.add(models.Track.fromURI(st));
+						toSet.push(models.Track.fromURI(st));
 
 					}
 
-					tasteProfile.tracks.snapshot(0, 100).done(function(t){
-            app.presentSongs(t, cb);
-          });
+					tasteProfile.tracks.add(toSet).done(function(p){
+						tasteProfile.tracks.snapshot(0, 70).done(function(t){
+		            		app.presentSongs(t, cb);
+		          		});
+					});
 
 				}
 			}
@@ -82,7 +86,19 @@ var app = {
 	},
 
 	presentSongs: function(t, cb) {
-		cb(t.toArray());
+
+		require(['$api/models'], function(models) {
+			var promises = new Array();
+
+			t.toArray().forEach(function(te){
+				promises.push(te.load('name', 'image'));
+			});
+
+			var results = models.Promise.join(promises).done(function(list){
+				cb(list);
+			});
+		});
+		
 	},
 
 	fetchBiometrics: function(cb) {
@@ -109,7 +125,7 @@ var app = {
 				'static?api_key=7XGOU94ICDTSF1A2I' +
 				add +
 				'&format=json' +
-				'&results=10' +
+				'&results=70' +
 				'&type=artist-radio' +
 				'&max_energy=' + maxenergy +
 				'&min_energy=' + minenergy +
@@ -122,3 +138,9 @@ var app = {
 		});
 	}
 };
+
+$(function() {
+	app.buildSuggestions(1, 1, function(asdf){
+		console.log(asdf);
+	});
+ });
