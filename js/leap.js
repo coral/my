@@ -179,6 +179,7 @@ $(function(){
             clearTimeout(timeout);
             $moodChooser.attr('class', '');
             $decideBar.css({'-webkit-transition': 'width 0', 'width': 0 });
+            if($tracks) $tracks.filter('.active').removeClass('active');
           }
 
           $($fingers[pointableId]).css('opacity', '0');

@@ -40,10 +40,6 @@
   box-shadow: 5px 5px 7px #111;
 }
 
-#tracks > div.active > span {
-  z-index: 2;
-}
-
 #tracks > div > span {
   font-size: 12px;
   font-weight: bold;
