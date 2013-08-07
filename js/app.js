@@ -170,9 +170,9 @@ var app = {
 		});
 	}
 };
-
+/*
 $(function() {
 	app.buildSuggestions(1.0, 1.0, function(asdf){
 		console.log(asdf);
 	});
- });
+ });*/
