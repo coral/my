@@ -6,10 +6,11 @@ var app = {
 		
 		if(energy <= 0.1) {
 			minenergy = energy;
-			minenergy = String(minenergy).substr(1);
-			      if(	minenergy == "1.0")
+    	if(	minenergy == 0.0)
        	minenergy = parseInt(minenergy)
-
+	    else
+			  minenergy = String(minenergy).substr(1);
+		
 	
 		} else {
 			minenergy = energy - 0.1;
@@ -19,9 +20,11 @@ var app = {
 		if(energy >= 0.9) {
 		
 			maxenergy = energy;
-	 		maxenergy = String(maxenergy).substr(1);
-      if(maxenergy == "1.0")
+			if(maxenergy == 1.0)
        maxenergy = parseInt(maxenergy)
+      else
+	 	  maxenergy = String(maxenergy).substr(1);
+
 	
 		} else {
 			maxenergy = energy + 0.1;
@@ -30,9 +33,11 @@ var app = {
 
 		if(valence <= 0.1) {
 			minvalence = valence;
-			minvalence = String(minvalence).substr(1);
-	      if(maxvalence == "1.0")
+			if(minvalence == 0.0)
        minvalence = parseInt(minvalence)
+      else
+			minvalence = String(minvalence).substr(1);
+
    
 		} else {
 			minvalence = valence - 0.1;
@@ -41,17 +46,16 @@ var app = {
 
 		if(valence >= 0.9) {
 			maxvalence = valence;
-  		maxvalence = String(maxvalence).substr(1);
-  		  if(maxvalence == "1.0")
+	    if(maxvalence == 1.0)
        maxvalence = parseInt(maxvalence)
-   
+      else
+  		maxvalence = String(maxvalence).substr(1);
+  	
      
 		} else {
 			maxvalence = valence + 0.1;
 			maxvalence = String(maxvalence).substr(1)
 		}
-    if(maxenergy == "1.0")
-       maxenergy = parseInt(maxenergy)
          
        
 		require(['$api/toplists'], function(toplists) {
@@ -166,7 +170,7 @@ var app = {
 };
 
 $(function() {
-	app.buildSuggestions(1.0, 1.0, function(asdf){
+	app.buildSuggestions(0.0, 1.0, function(asdf){
 		console.log(asdf);
 	});
  });
