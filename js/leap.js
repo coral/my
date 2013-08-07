@@ -110,9 +110,17 @@ $(function(){
 
             clearTimeout(timeout);
 
-            $decideBar.css({'-webkit-transition': 'width 0', 'width': 0 });
+            $decideBar.css({'transition-duration': '0, 0','transition-delay': '0, 0', 'width': 0, 'background-color': 'red' });
 
-            _.defer(function(){ $decideBar.css({'-webkit-transition': 'width 2000ms', 'width': '100%' }); });
+            _.defer(function(){ $decideBar.css({
+              'transition-property': 'width, background-color',
+              'transition-duration': '2000ms, 200ms',
+              'transition-timing-function': 'ease, ease',
+              'transition-delay': '0, 1800ms',
+              'width': '100%',
+              'background-color': '#00DA00'
+              });
+            });
 
             timeout = setTimeout(function(){
 
@@ -126,7 +134,7 @@ $(function(){
 
                 document.body.classList.add('decided');
 
-                $decideBar.css({'-webkit-transition': 'width 0', 'width': 0 });
+                $decideBar.css({'transition-duration': '0, 0','transition-delay': '0, 0', 'width': 0, 'background-color': 'red' });
 
               } else if(page === 'trackList') {
 
@@ -134,7 +142,8 @@ $(function(){
 
                 if(tracks[trackIndex].uri) models.player.playTrack(tracks[trackIndex]);
 
-                $decideBar.css({'-webkit-transition': 'width 0', 'width': 0 });
+                $decideBar.css({'transition-duration': '0, 0','transition-delay': '0, 0', 'width': 0, 'background-color': 'red' });
+
 
               }
 
@@ -178,7 +187,7 @@ $(function(){
           if(pointableId === 0) {
             clearTimeout(timeout);
             $moodChooser.attr('class', '');
-            $decideBar.css({'-webkit-transition': 'width 0', 'width': 0 });
+            $decideBar.css({'transition-duration': '0, 0','transition-delay': '0, 0', 'width': 0, 'background-color': 'red' });
             if($tracks) $tracks.filter('.active').removeClass('active');
           }
 
