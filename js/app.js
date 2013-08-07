@@ -95,7 +95,7 @@ var app = {
 				{
 					var toSet = new Array();
 					
-					toSet.push(models.Track.fromURI("spotify:track:1FOC5ffOapx07qV4Eshhju"));
+					//toSet.push(models.Track.fromURI("spotify:track:1FOC5ffOapx07qV4Eshhju"));
 					for (var i = 0; i < songs.length; i++)
 					{
 						var st = songs[i].tracks[0].foreign_id;
