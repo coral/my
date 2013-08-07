@@ -92,7 +92,7 @@ $(function(){
 
           if(page === 'trackList' && $tracks) {
 
-            trackIndex = Math.floor(left*10) + (Math.floor(top*7) * 10);
+            trackIndex = Math.floor(left*7) + (Math.floor(top*5) * 7);
 
             $tracks.filter('.active').removeClass('active');
 
@@ -116,7 +116,7 @@ $(function(){
               'transition-property': 'width, background-color',
               'transition-duration': '2000ms, 200ms',
               'transition-timing-function': 'ease, ease',
-              'transition-delay': '0, 1800ms',
+              'transition-delay': '0, 1500ms',
               'width': '100%',
               'background-color': '#00DA00'
               });
@@ -138,7 +138,7 @@ $(function(){
 
               } else if(page === 'trackList') {
 
-                trackIndex = Math.floor(left*10) + (Math.floor(top*7) * 10);
+                trackIndex = Math.floor(left*7) + (Math.floor(top*5) * 7);
 
                 if(tracks[trackIndex].uri) models.player.playTrack(tracks[trackIndex]);
 
