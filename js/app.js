@@ -56,7 +56,7 @@ var app = {
 
 		require(['$api/models'], function(models) {
 
-			var tasteProfilePromise = models.Playlist.createTemporary("temppp").done(adder);
+			var tasteProfilePromise = models.Playlist.createTemporary("temppp" + Math.floor(Math.random()*110)).done(adder);
 			function adder(tasteProfile) {
 				var songs = callback.response.songs;
 
@@ -140,7 +140,7 @@ var app = {
 };
 
 $(function() {
-	app.buildSuggestions(0.0, 1, function(asdf){
+	app.buildSuggestions(1, 1, function(asdf){
 		console.log(asdf);
 	});
  });
