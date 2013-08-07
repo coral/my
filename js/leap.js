@@ -70,29 +70,39 @@ $(function(){
 
       return function(posX, posY){
 
-        var trackIndex;
+        var trackIndex, $track;
+
+        left = valancy = (posX - left) / width;
+
+        top = (posY - top) / height;
 
         if(posX > left && posX < right && posY > top && posY < bottom) {
 
-          if(energy === undefined || Math.abs(energy - (1 - ((posY - top) / height))) > 0.01 || Math.abs(valancy - ((posX - left) / width) > 0.01)) {
+          if(page === 'trackList' && $tracks) {
+
+            trackIndex = Math.floor(left*10) + (Math.floor(top*7) * 10);
+
+            $tracks.filter('.active').removeClass('active');
+
+            $track = $tracks[trackIndex];
+
+            if($track) $track.classList.add('active');
+
+          }
+
+          if(energy === undefined || Math.abs(energy - (1 - ((posY - top) / height))) > 0.05 || Math.abs(valancy - ((posX - left) / width) > 0.05)) {
+
+            valancy = (posX - left) / width;
+
+            energy = 1 - top;
 
             clearTimeout(timeout);
 
             $decideBar.css({'-webkit-transition': 'width 0', 'width': 0 });
 
-
-            if(page === 'trackList') {
-
-              trackIndex = Math.floor(left*10) + (Math.floor(top*10) * 10);
-
-              $tracks.removeClass('active')[trackIndex].classList.add('active');
-
-            }
-
             _.defer(function(){ $decideBar.css({'-webkit-transition': 'width 2000ms', 'width': '100%' }); });
 
             timeout = setTimeout(function(){
-
 
               if(page === 'moodChooser') {
 
@@ -108,7 +118,7 @@ $(function(){
 
               } else if(page === 'trackList') {
 
-                $tracks.removeClass('active');
+                trackIndex = Math.floor(left*10) + (Math.floor(top*7) * 10);
 
                 models.player.playTrack(tracks[trackIndex]);
 
@@ -121,14 +131,6 @@ $(function(){
             }, 2000);
 
           }
-
-          left = valancy = (posX - left) / width;
-
-          top = (posY - top) / height;
-
-          valancy = (posX - left) / width;
-
-          energy = 1 - top;
 
           if(page === 'moodChooser') {
 
@@ -172,20 +174,20 @@ $(function(){
         } else {
 
         var pointable = frame.pointables[pointableId];
-        var posX = (pointable.stabilizedTipPosition[0]*3) + 400;
-        var posY = wHeight-(pointable.stabilizedTipPosition[1]*3) + 200;
+          var posX = (pointable.stabilizedTipPosition[0]*3) + 400;
+          var posY = wHeight-(pointable.stabilizedTipPosition[1]*3) + 200;
 
-        if(pointableId === 0) {
-          setMoodPosition(posX, posY);
-          if(document.body.classList[0] === 'cover') {
-            document.body.classList.remove('cover');
-            page = 'moodChooser';
+          if(pointableId === 0) {
+            setMoodPosition(posX, posY);
+            if(document.body.classList[0] === 'cover') {
+              document.body.classList.remove('cover');
+              page = 'moodChooser';
+            }
           }
-        }
 
-        $moodBar.css('background-color', fingerColor);
+          $moodBar.css('background-color', fingerColor);
 
-        $($fingers[pointableId]).css({opacity:'1',left:posX,top:posY,'background-color':fingerColor});
+          $($fingers[pointableId]).css({opacity:'1',left:posX,top:posY,'background-color':fingerColor});
 
         }
 
