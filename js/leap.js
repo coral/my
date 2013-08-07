@@ -12,6 +12,8 @@ $(function(){
 
     var timeout,
         displaySuggestions,
+        setMoodPosition,
+        page = 'cover',
         wHeight = $(window).height(),
         fingerColor = '#fff',
         $moodChooser = $('#mood-chooser'),
@@ -23,14 +25,13 @@ $(function(){
 
       console.log(suggestions);
 
-      models.Track.fromURI(suggestions[0].uri).load('name').done(function(track) {
-        console.log(track.uri + ': ' + track.name.decodeForText());
-        document.getElementById('track-list').innerHTML = track.name.decodeForHtml();
-      });
+      models.player.playTrack(suggestions[0]);
+
+      $('#container').append('<img src="' + suggestions[0].image + '">');
 
     };
 
-    var setMoodPosition = (function(){
+    setMoodPosition = (function(){
       var $colour = $('#colour'),
           $valance = $('#valence'),
           $energy = $('#energy'),
@@ -45,8 +46,7 @@ $(function(){
 
       return function(posX, posY){
 
-        if(posX > left && posX < right && posY > top && posY < bottom) {
-
+        if(posX > left && posX < right && posY > top && posY < bottom && page === 'moodChooser') {
 
           if(energy === undefined || Math.abs(energy - (1 - ((posY - top) / height))) > 0.01 || Math.abs(valancy - ((posX - left) / width) > 0.01)) {
 
@@ -57,6 +57,10 @@ $(function(){
             _.defer(function(){ $decideBar.css({'-webkit-transition': 'width 2000ms', 'width': '100%' }); });
 
             timeout = setTimeout(function(){
+            
+              page = 'trackList';
+
+              clearTimeout(timeout);
 
               document.body.classList.add('decided');
 
@@ -115,7 +119,10 @@ $(function(){
 
         if(pointableId === 0) {
           setMoodPosition(posX, posY);
-          if(document.body.classList[0] === 'cover') document.body.classList.remove('cover');
+          if(document.body.classList[0] === 'cover') {
+            document.body.classList.remove('cover');
+            page = 'moodChooser';
+          }
         }
 
         $moodBar.css('background-color', fingerColor);
