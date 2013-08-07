@@ -23,6 +23,20 @@ $(function(){
         $moodBar = $('#mood-bar'),
         $fingers = $('.finger');
 
+    document.body.addEventListener("keydown", function(e) {
+    
+    console.log(e);
+      if(e.keyCode === 8) {
+
+        document.body.classList.remove('decided');
+
+        $tracks.remove();
+
+        $tracks = false;
+
+      }
+    }, false);
+
     displaySuggestions = function(suggestions) {
 
       $tracksDiv = $('<div id="tracks"></div>');
@@ -120,7 +134,7 @@ $(function(){
 
                 trackIndex = Math.floor(left*10) + (Math.floor(top*7) * 10);
 
-                models.player.playTrack(tracks[trackIndex]);
+                if(tracks[trackIndex].uri) models.player.playTrack(tracks[trackIndex]);
 
                 $decideBar.css({'-webkit-transition': 'width 0', 'width': 0 });
 
