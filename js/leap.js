@@ -24,15 +24,16 @@ $(function(){
         $fingers = $('.finger');
 
     document.body.addEventListener("keydown", function(e) {
-    
-    console.log(e);
-      if(e.keyCode === 8) {
+
+      if(e.keyCode === 32) {
 
         document.body.classList.remove('decided');
 
-        $tracks.remove();
+        $('#tracks').remove();
 
         $tracks = false;
+
+        page = 'moodChooser';
 
       }
     }, false);
